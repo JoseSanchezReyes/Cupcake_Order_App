@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cupcakeorder.databinding.FragmentSummaryBinding
 import com.example.cupcakeorder.model.OrderViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class SummaryFragment : Fragment() {
     private var binding: FragmentSummaryBinding? = null
@@ -27,7 +28,7 @@ class SummaryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentBinding = FragmentSummaryBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -39,8 +40,6 @@ class SummaryFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
             summaryFragment = this@SummaryFragment
-
-            //sendButton.setOnClickListener { sendOrder() }
         }
     }
 
@@ -65,16 +64,16 @@ class SummaryFragment : Fragment() {
             .putExtra(Intent.EXTRA_EMAIL, arrayOf("correo@correo.com"))
             .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order, nameOfUser))
             .putExtra(Intent.EXTRA_TEXT, orderSummary)
-        //comprobar si hay una app que pueda abrir mi intent
+        /* comprobar si hay una app que pueda abrir mi intent */
+        @Suppress("DEPRECATION")
         if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
             startActivity(intent)
         }
 
-        Toast.makeText(
-            activity,
-            "Send Order to ${sharedViewModel.nameUser.value}",
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(activity, "Send Order to ${sharedViewModel.nameUser.value}", Toast.LENGTH_SHORT).show()
+        binding?.let {
+            Snackbar.make (it.root, "Send Order to ${sharedViewModel.nameUser.value}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {
