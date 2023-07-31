@@ -64,15 +64,24 @@ class SummaryFragment : Fragment() {
             .putExtra(Intent.EXTRA_EMAIL, arrayOf("correo@correo.com"))
             .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order, nameOfUser))
             .putExtra(Intent.EXTRA_TEXT, orderSummary)
+
         /* comprobar si hay una app que pueda abrir mi intent */
         @Suppress("DEPRECATION")
         if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
             startActivity(intent)
         }
 
-        Toast.makeText(activity, "Send Order to ${sharedViewModel.nameUser.value}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            activity,
+            "Send Order to ${sharedViewModel.nameUser.value}",
+            Toast.LENGTH_SHORT
+        ).show()
         binding?.let {
-            Snackbar.make (it.root, "Send Order to ${sharedViewModel.nameUser.value}", Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                it.root,
+                "Send Order to ${sharedViewModel.nameUser.value}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -80,5 +89,4 @@ class SummaryFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
-
 }

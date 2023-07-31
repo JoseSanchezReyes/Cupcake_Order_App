@@ -13,11 +13,11 @@ private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
 class OrderViewModel : ViewModel() {
 
-    private val _quantity = MutableLiveData<Int>()
-    val quantity: LiveData<Int> = _quantity
-
     private val _nameUser = MutableLiveData<String>()
     val nameUser: LiveData<String> = _nameUser
+
+    private val _quantity = MutableLiveData<Int>()
+    val quantity: LiveData<Int> = _quantity
 
     private val _flavor = MutableLiveData<String>()
     val flavor: LiveData<String> = _flavor
@@ -57,13 +57,13 @@ class OrderViewModel : ViewModel() {
     }
 
     /* ---------------------------------START FRAGMENT ----------------------------------- */
-    //Verify if flavor is set or Empty in Start Fragment
+    //Verify if flavor is set or Empty
     fun hasNoFlavorSet(): Boolean = _flavor.value.isNullOrEmpty()
 
     /* ---------------------------------PICKUP FRAGMENT ---------------------------------- */
     private fun getPickupOptions(): List<String> {
         val options = mutableListOf<String>()
-        val formatter = SimpleDateFormat("E MMM d y", Locale.getDefault())
+        val formatter = SimpleDateFormat("E MMM d y", Locale.getDefault()) //Locale => representa región geografica especifica
         val calendar = Calendar.getInstance() //Contiene fecha y hora actual
         repeat(4) {
             options.add(formatter.format(calendar.time))
@@ -83,7 +83,7 @@ class OrderViewModel : ViewModel() {
 
     private fun updatePrice() {
         var calculatedPrice = (_quantity.value ?: 0) * (PRICE_PER_CUPCAKE)
-        if (dateOptions[0] == _date.value) {
+        if (_date.value == dateOptions[0]) {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
         }
         _price.value = calculatedPrice

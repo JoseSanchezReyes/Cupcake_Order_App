@@ -6,7 +6,7 @@
     app:startDestination="@id/startFragment">
 
     <!-- popUpTo => Sirve para quitar la pila de actividades e
-                    inhabilita las demas acciones de navegacion (necesitas dos clicks para salir de la app)
+                    inhabilita las demas acciones de navegacion
     popUpToInclusive => Solo crea una instancia de StartFragment en la pila de actividades
                     -->
     <fragment
