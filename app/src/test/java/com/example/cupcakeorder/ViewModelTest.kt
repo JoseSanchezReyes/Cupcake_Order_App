@@ -31,5 +31,12 @@ class ViewModelTest {
         assertEquals("27,00 €", viewModel.price.value)
     }
 
-
+    @Test
+    fun date_cupcakes() {
+        val viewModel = OrderViewModel()
+        val firstDate = viewModel.dateOptions[0]
+        viewModel.date.observeForever {  }
+        viewModel.setDate(firstDate)
+        assertEquals(/*firstDate */"lun jul 31 2023", viewModel.date.value)
+    }
 }
