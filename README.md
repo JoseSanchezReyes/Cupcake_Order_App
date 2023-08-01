@@ -1,7 +1,7 @@
 # 🚀 Cupcake - App
 
 > Basic application using an activity and fragments, with the MVVM architecture, LiveData, and implicit Intent.
-> It consists of entering the name and choosing the quantity of cakes from 1 to 12, 
+> It consists of entering the name and choosing the quantity of cakes 1, 6 or 12, 
 > then selecting the flavor and date, and displaying the order summary, showing the cost of the order on each screen.
 
 ## Developing
